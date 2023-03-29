@@ -1,0 +1,20 @@
+{% extends "template.html" %}
+
+{% block content %}
+            <header>
+                <h1>Login</h1>
+            </header>
+            <form action="#" class="login-form">
+                <div class="f-group">
+                    {{ form.email.label(class_="form-label", for="user_email") }}
+                    {{ form.email(class_="form-control", placeholder="example@email.com", id="user_email") }}
+                </div>
+                <div class="f-group">
+                    {{ form.password.label(class_="form-label", for="user_password") }}
+                    {{ form.password(class_="form-control", placeholder="Type your password", id="user_password") }}
+                </div>
+
+                <button type="submit" class="btn btn-outline-primary btn-lg">Login</button>
+            </form>
+            <p>Don't have an account? <a href="./signup.html">Register</a></p>
+{% endblock %}

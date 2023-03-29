@@ -1,0 +1,31 @@
+{% extends "template.html" %}
+
+{% block content %}
+            <header>
+                <h1>Registration</h1>
+            </header>
+            <form action="" class="register-form">
+                <div class="f-group">
+                    <label for="user_name" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name" id="user_name" placeholder="Pedro">
+                </div>
+                <div class="f-group">
+                    <label for="user_lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" name="lastName" id="user_lastName" placeholder="Perez">
+                </div>
+                <div class="f-group">
+                    <label for="user_email" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" id="user_email" placeholder="example@email.com">
+                </div>
+                <div class="f-group">
+                    <label for="user_password" class="form-label">Password</label>
+                    <input type="password" name="password" id="user_password" class="form-control" placeholder="Type your password">
+                </div>
+                <div class="f-group">
+                    <label for="user_confirmPassword" class="form-label">Confirm</label>
+                    <input type="password" name="confirmPassword" id="user_confirmPassword" class="form-control" placeholder="Confirm password">
+                </div>
+
+                <button type="submit" class="btn btn-outline-success btn-lg">Register</button>
+            </form>
+{% endblock %}
