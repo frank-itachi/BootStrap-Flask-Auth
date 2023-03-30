@@ -4,17 +4,24 @@
             <header>
                 <h1>Login</h1>
             </header>
-            <form action="#" class="login-form">
-                <div class="f-group">
-                    {{ form.email.label(class_="form-label", for="user_email") }}
-                    {{ form.email(class_="form-control", placeholder="example@email.com", id="user_email") }}
-                </div>
-                <div class="f-group">
-                    {{ form.password.label(class_="form-label", for="user_password") }}
-                    {{ form.password(class_="form-control", placeholder="Type your password", id="user_password") }}
-                </div>
+            <form action="{{ url_for('route.login') }}" class="login-form" method="post" novalidate>
+                {% for field in form %}
+                        <div class="f-group">
+                            {{ field.label(class_="form-label") }}
+                            {% if not field.errors: %}
+                                {{ field(class_="form-control") }}
+                            {% else %}
+                                {{ field(class_="form-control is-invalid") }}
+                            {% endif %}
+                            <div class="invalid-feedback">
+                                {% for err in field.errors: %}
+                                    {{ err }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                {% endfor %}
 
                 <button type="submit" class="btn btn-outline-primary btn-lg">Login</button>
             </form>
-            <p>Don't have an account? <a href="./signup.html">Register</a></p>
+            <p>Don't have an account? <a href="{{ url_for('route.register') }}">Register</a></p>
 {% endblock %}
