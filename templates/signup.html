@@ -6,24 +6,24 @@
             </header>
             <form action="" class="register-form">
                 <div class="f-group">
-                    <label for="user_name" class="form-label">Name</label>
-                    <input type="text" class="form-control" name="name" id="user_name" placeholder="Pedro">
+                    {{ form.name.label(class_="form-label", for="user_name") }}
+                    {{ form.name(class_="form-control", placeholder="Luis", id="user_name")  }}
                 </div>
                 <div class="f-group">
-                    <label for="user_lastName" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" name="lastName" id="user_lastName" placeholder="Perez">
+                    {{ form.last_name.label(class_="form-label", for="user_lastName") }}
+                    {{ form.last_name(class_="form-control", placeholder="Perez", id="user_lastName")  }}
                 </div>
                 <div class="f-group">
-                    <label for="user_email" class="form-label">Email</label>
-                    <input type="email" class="form-control" name="email" id="user_email" placeholder="example@email.com">
+                    {{ form.email.label(class_="form-label", for="user_email") }}
+                    {{ form.email(class_="form-control", placeholder="example@email.com", id="user_email")  }}
                 </div>
                 <div class="f-group">
-                    <label for="user_password" class="form-label">Password</label>
-                    <input type="password" name="password" id="user_password" class="form-control" placeholder="Type your password">
+                    {{ form.password.label(class_="form-label", for="user_password") }}
+                    {{ form.password(class_="form-control", placeholder="Type a password", id="user_password")  }}
                 </div>
                 <div class="f-group">
-                    <label for="user_confirmPassword" class="form-label">Confirm</label>
-                    <input type="password" name="confirmPassword" id="user_confirmPassword" class="form-control" placeholder="Confirm password">
+                    {{ form.confirm_password.label(class_="form-label", for="user_confirmPassword") }}
+                    {{ form.confirm_password(class_="form-control", placeholder="Confirm the password", id="user_confirmPassword")  }}
                 </div>
 
                 <button type="submit" class="btn btn-outline-success btn-lg">Register</button>
