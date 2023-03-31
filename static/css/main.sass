@@ -17,12 +17,13 @@ button[type="submit"]
 
 main 
     grid-area: main
+    align-self: center
     justify-self: center
-    width: 40vw
+    width: 45vw
 
     .container 
-        padding: 2rem .7rem
-        border-radius: .5rem
+        padding: 2rem 1rem
+        border-radius: .3rem
 
 header
     margin-bottom: 3rem
@@ -45,7 +46,7 @@ header
     margin: 0
 
 .form-control 
-    flex-basis: 75%
+    flex-basis: 70%
     border: none 
     border-radius: 0
     border-bottom: 1px solid lighten(gray, 30)
@@ -56,3 +57,8 @@ header
 
 .invalid-feedback 
     text-align: right
+
+.form-feedback
+    align-self: flex-end
+    font-size: .875rem
+    color: red

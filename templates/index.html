@@ -1,5 +1,9 @@
 {% extends "template.html" %}
 
 {% block content %}
-    <h1>Welcome User Name</h1>
+    {% if user: %}
+        <h1>Welcome {{ user }}</h1>
+    {% else %}
+        <h1>Welcome</h1>
+    {% endif %}
 {% endblock %}

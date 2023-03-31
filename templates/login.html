@@ -20,8 +20,18 @@
                             </div>
                         </div>
                 {% endfor %}
-
-                <button type="submit" class="btn btn-outline-primary btn-lg">Login</button>
+                <div class="f-group">
+                    <button type="submit" class="btn btn-outline-primary btn-lg">Login</button>
+                        <div class="form-feedback">
+                            {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        {{ message }}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                </div>
             </form>
             <p>Don't have an account? <a href="{{ url_for('route.register') }}">Register</a></p>
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, render_template, request, redirect, url_for, flash 
 from forms import Login, Register
 from extensions import db
 from models import User
@@ -8,16 +8,26 @@ route = Blueprint('route', __name__)
 
 @route.route('/')
 def index():
-    return render_template("index.html")
+    db.create_all()
+    user_name =  request.args.get("user_name")
+    return render_template("index.html", user=user_name)
 
 
 @route.route('/login', methods=['GET', 'POST'])
 def login():
     login_form = Login(request.form)
+    msg = "User or password incorrect. Please try again."
     if request.method == "POST" and login_form.validate():
-        for attr in login_form:
-            print(attr.data)
-        return redirect('/')
+        user = User.query.filter_by(email=str(login_form.email.data)).first()
+        if not user:
+            flash(msg)
+            return redirect('/login')
+        elif user.password != str(login_form.password.data):
+            flash(msg)
+            return redirect('/login')
+        else:
+            return redirect(url_for('route.index', user_name=user.first_name))
+        
     return render_template("login.html", form=login_form)
 
 
@@ -27,6 +37,7 @@ def register():
     if request.method == "POST" and register_form.validate():
         user = User.query.filter_by(email=str(register_form.user_email.data)).first()
         if not user:
+            user = User()
             user.first_name = str(register_form.user_name.data)
             user.last_name = str(register_form.user_last_name.data)
             user.email = str(register_form.user_email.data)
@@ -38,8 +49,9 @@ def register():
 
             return redirect('/')
         else:
-            pass
-        return redirect('/')
+            flash("An account already exists with this email.")
+            return render_template("signup.html", form=register_form)
+        
     return render_template("signup.html", form=register_form)
 
 
