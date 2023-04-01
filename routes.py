@@ -1,16 +1,22 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash 
 from forms import Login, Register
-from extensions import db
+from extensions import db, login_manager
+from flask_login import login_user, current_user, logout_user
 from models import User
 
+
 route = Blueprint('route', __name__)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.filter_by(id=user_id).first()
 
 
 @route.route('/')
 def index():
     db.create_all()
-    user_name =  request.args.get("user_name")
-    return render_template("index.html", user=user_name)
+    return render_template("index.html")
 
 
 @route.route('/login', methods=['GET', 'POST'])
@@ -26,7 +32,8 @@ def login():
             flash(msg)
             return redirect('/login')
         else:
-            return redirect(url_for('route.index', user_name=user.first_name))
+            login_user(user)
+            return redirect(url_for('route.index'))
         
     return render_template("login.html", form=login_form)
 
@@ -42,11 +49,11 @@ def register():
             user.last_name = str(register_form.user_last_name.data)
             user.email = str(register_form.user_email.data)
             user.password = str(register_form.user_password.data)
-            print(user.first_name)
             # insert the user into the db
             db.session.add(user)
             db.session.commit()
-
+            # login user 
+            login_user(user)
             return redirect('/')
         else:
             flash("An account already exists with this email.")
@@ -54,4 +61,9 @@ def register():
         
     return render_template("signup.html", form=register_form)
 
+
+@route.route('/logout')
+def logout():
+    logout_user()
+    return redirect('/')
 

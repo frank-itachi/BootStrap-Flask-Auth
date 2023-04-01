@@ -1,6 +1,6 @@
 from flask import Flask
 from routes import route
-from extensions import db
+from extensions import db, login_manager
 from models import *
 
 
@@ -13,6 +13,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
+    login_manager.init_app(app)
 
     return app
 
